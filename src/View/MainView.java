@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 
 public class MainView {
 
-	private Botones botones;
+	public Botones botones;
 	private JFrame frame;
 
 	public MainView(JFrame frame) {
@@ -21,8 +21,7 @@ public class MainView {
 		this.frame.setVisible(true);
 		
 		botones = new Botones(frame,3);
-		botones.llenarListaBotones(frame);
-		
+		botones.llenarListaBotones();
 	}
 
 }

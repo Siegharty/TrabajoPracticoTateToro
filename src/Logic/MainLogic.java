@@ -1,26 +1,28 @@
 package Logic;
 
-import Model.Coordenada;
+import javax.swing.JButton;
+import View.Botones;
+
 
 public class MainLogic {
 
-	private char ganador = ' ';
-	private Coordenada[][] coordenadas;
+	private static String ganador = " ";
+	private static JButton[][] _matriz;
 
-	public MainLogic(Coordenada[][] coordenadas) {
-		this.coordenadas = coordenadas;
+	public static String getGanador() {
+		return ganador;
+	}
+	
+	public static void setMatriz(JButton[][] matriz) {
+		_matriz = matriz;
 	}
 
-	public char getGanador() {
-		return this.ganador;
-	}
-
-	private Coordenada buscarCoordenada(int i, int j) {
-		return this.coordenadas[i][j];
+	private static JButton buscarCoordenada(int i, int j) {
+		return _matriz[i][j];
 	}
 
 	// Validacion de partida
-	public boolean validarPartida() {
+	public static boolean validarPartida() {
 
 		if (recorrerPorFilas()) {
 			return true;
@@ -41,15 +43,15 @@ public class MainLogic {
 		return false;
 	}
 
-	private boolean recorrerPorFilas() {
+	private static boolean recorrerPorColumnas() {
 		int cont;
 
 		// Recorrer Por Filas
 		for (cont = 0; cont < 3; ++cont) {
-			if (buscarCoordenada(cont, 0).getValor() == buscarCoordenada(cont, 1).getValor()
-					&& buscarCoordenada(cont, 1).getValor() == buscarCoordenada(cont, 2).getValor()
-					&& buscarCoordenada(cont, 2).getValor() != ' ') {
-				this.ganador = buscarCoordenada(cont, 0).getValor();
+			if (buscarCoordenada(cont, 0).getText() == buscarCoordenada(cont, 1).getText()
+					&& buscarCoordenada(cont, 1).getText() == buscarCoordenada(cont, 2).getText()
+					&& buscarCoordenada(cont, 2).getText() != "") {
+				ganador = buscarCoordenada(cont, 0).getText();
 				return true;
 			}
 		}
@@ -57,15 +59,15 @@ public class MainLogic {
 		return false;
 	}
 
-	private boolean recorrerPorColumnas() {
+	private static boolean recorrerPorFilas() {
 		int cont;
 
 		// Recorrer Por Columnas
 		for (cont = 0; cont < 3; ++cont) {
 			if (buscarCoordenada(0, cont) == buscarCoordenada(1, cont)
-					&& buscarCoordenada(1, cont).getValor() == buscarCoordenada(2, cont).getValor()
-					&& buscarCoordenada(2, cont).getValor() != ' ') {
-				this.ganador = buscarCoordenada(0, cont).getValor();
+					&& buscarCoordenada(1, cont).getText() == buscarCoordenada(2, cont).getText()
+					&& buscarCoordenada(2, cont).getText() != "") {
+				ganador = buscarCoordenada(0, cont).getText();
 				return true;
 			}
 		}
@@ -73,24 +75,24 @@ public class MainLogic {
 		return false;
 	}
 
-	private boolean recorrerPorDiagonalIzq() {
+	private static boolean recorrerPorDiagonalIzq() {
 		// Recorrer por diagonal 0,0 hasta 2,2
-		if (buscarCoordenada(0, 0).getValor() == buscarCoordenada(1, 1).getValor()
-				&& buscarCoordenada(1, 1).getValor() == buscarCoordenada(2, 2).getValor()
-				&& buscarCoordenada(2, 2).getValor() != ' ') {
-			this.ganador = buscarCoordenada(0, 0).getValor();
+		if (buscarCoordenada(0, 0).getText() == buscarCoordenada(1, 1).getText()
+				&& buscarCoordenada(1, 1).getText() == buscarCoordenada(2, 2).getText()
+				&& buscarCoordenada(2, 2).getText() != "") {
+			ganador = buscarCoordenada(0, 0).getText();
 			return true;
 		}
 
 		return false;
 	}
 
-	private boolean recorrerPorDiagonalDer() {
+	private static boolean recorrerPorDiagonalDer() {
 		// Recorrer por diagonal 0,2, hasta 2,0
-		if (buscarCoordenada(0, 2).getValor() == buscarCoordenada(1, 1).getValor()
-				&& buscarCoordenada(1, 1).getValor() == buscarCoordenada(2, 0).getValor()
-				&& buscarCoordenada(2, 0).getValor() != ' ') {
-			this.ganador = buscarCoordenada(0, 2).getValor();
+		if (buscarCoordenada(0, 2).getText() == buscarCoordenada(1, 1).getText()
+				&& buscarCoordenada(1, 1).getText() == buscarCoordenada(2, 0).getText()
+				&& buscarCoordenada(2, 0).getText() != "") {
+			ganador = buscarCoordenada(0, 2).getText();
 			return true;
 		}
 
